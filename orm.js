@@ -1,27 +1,43 @@
-const schema = {
-  user: {
-    id: String,
-    name: String
-  },
+// String scalar type.
+class StringType {
+  name() {
+    return 'string'
+  }
 
-  post: {
-    id: String,
-    title: String,
-    author: ['user']
-    tags: [String]
+  validate() {
+
+  }
+
+  parse(value) {
+    return String(value)
+  }
+
+  serialize(value) {
+    return String(value)
   }
 }
 
+// Memory storage adapter.
 class memoryAdapter {
+  static db
+
   name() {
     return 'memory'
   }
 
   setup(settings) {
+    this.db = {}
+  }
+
+  add(id) {
 
   }
 
   get(id) {
+
+  }
+
+  delete(id) {
 
   }
 
@@ -30,6 +46,7 @@ class memoryAdapter {
   }
 }
 
+// Libraries.
 const argumentsReducer = (keys, obj) =>
   keys.reduce((prev, curr) =>
     ({ ...prev,  [curr]: obj[curr]}), {})
@@ -39,6 +56,45 @@ const setupAdapters = adapters => settings => settings.map(({ id, url }) => {
   adapters(info)
 })
 
+const orm = compose(
+  setupAdapters([memoryAdapter])(settings),
+  startConnections(schema)
+)
+
+// Example complex types.
+const UserType = {
+  user: StringType,
+  name: StringType
+}
+
+const PostType = {
+  id: StringType,
+  title: StringType,
+  author: UserType,
+  tags: [StringType]
+}
+
+const schema = {
+  UserType,
+  PostType
+}
+
+// Example schema.
+// const schema = {
+//   user: {
+//     id: String,
+//     name: String
+//   },
+//
+//   post: {
+//     id: String,
+//     title: String,
+//     author: ['user']
+//     tags: [String]
+//   }
+// }
+
+// Example settings.
 const settings = [
   {
     id: 'memoryDB',
@@ -51,13 +107,8 @@ const settings = [
   }
 ]
 
-const orm = compose(
-  setupAdapters([memoryAdapter])(settings),
-  startConnections(schema)
-)
-
+// Test.
 const db = orm(settings)
-
 const user123Posts = db.list('post', {
   author: {
     id: 123
