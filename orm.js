@@ -1,11 +1,21 @@
 // String scalar type.
-class StringType {
-  name() {
-    return 'string'
+class BaseScalarType {
+  name: null
+
+  constructor() {
+    // @TODO: this kind of checks could be replaced by flow?
+    if (typeof this.name !== 'string') {
+      throw new Error(`A scalar type needs a name.`);
+    }
   }
+}
 
-  validate() {
+class StringType extends BaseScalarType {
 
+  name: 'string'
+
+  validate(value) {
+    return typeof value ===
   }
 
   parse(value) {
@@ -15,6 +25,7 @@ class StringType {
   serialize(value) {
     return String(value)
   }
+
 }
 
 // Memory storage adapter.
