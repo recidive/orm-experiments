@@ -1,6 +1,6 @@
 // Memory storage adapter.
 class memoryAdapter {
-  static db
+  // db: {}
 
   name() {
     return 'memory'
@@ -30,7 +30,7 @@ class memoryAdapter {
 // Libraries.
 const argumentsReducer = (keys, obj) =>
   keys.reduce((prev, curr) =>
-    ({ ...prev,  [curr]: obj[curr]}), {})
+    ({ ...prev,  [curr]: obj[curr] }), {})
 
 const setupAdapters = adapters => settings => settings.map(({ id, url }) => {
   const info = parseURL(url)

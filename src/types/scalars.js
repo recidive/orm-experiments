@@ -1,9 +1,5 @@
-// String scalar type.
 class BaseScalarType {
-  name: null
-
   constructor() {
-    // @TODO: this kind of checks could be replaced by flow?
     if (typeof this.name !== 'string') {
       throw new Error(`A scalar type needs a name.`);
     }
@@ -12,7 +8,7 @@ class BaseScalarType {
 
 class StringType extends BaseScalarType {
 
-  name: 'string'
+  // name: 'string'
 
   parse(value) {
     return String(value)
@@ -22,4 +18,8 @@ class StringType extends BaseScalarType {
     return String(value)
   }
 
+}
+
+export default {
+  StringType: new StringType()
 }
