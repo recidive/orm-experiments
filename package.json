@@ -1,0 +1,30 @@
+{
+  "name": "orm-experiments",
+  "version": "1.0.0",
+  "description": "ORM experiments with flow.",
+  "main": "index.js",
+  "repository": {},
+  "author": "Henrique Recidive <recidive@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-jest": "^19.0.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "jest": "^19.0.2",
+    "regenerator-runtime": "^0.10.3"
+  },
+  "scripts": {
+    "build": "babel src -d build",
+    "watch": "babel src -w -d build",
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "jest": {
+    "transform": {".*": "<rootDir>/node_modules/babel-jest"},
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ]
+  }
+}
