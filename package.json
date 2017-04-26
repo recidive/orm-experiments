@@ -21,10 +21,16 @@
     "test-watch": "jest --watch"
   },
   "jest": {
-    "transform": {".*": "<rootDir>/node_modules/babel-jest"},
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
     "moduleFileExtensions": [
       "js",
       "json"
     ]
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "uuid": "^3.0.1"
   }
 }
